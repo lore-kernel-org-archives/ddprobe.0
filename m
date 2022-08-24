@@ -1,34 +1,33 @@
-Received: from a27-186.smtp-out.us-west-2.amazonses.com (a27-186.smtp-out.us-west-2.amazonses.com [54.240.27.186])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B21F1870
-	for <ddprobe@lists.linux.dev>; Wed, 24 Aug 2022 18:50:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=t4m3mn7v7zpr6jas7yz4ivc4rozilcmo; d=kernel.org; t=1661367053;
-	h=To:Subject:From:Message-Id:Date;
-	bh=hWvAhWvs3gS4hqdQez/z83MoUZZX797RdQlu0rzshDk=;
-	b=guWcm2SxpQCvgnWBWEtGxsiMzW4RKzYXUJQHWNOXasWXu7ctVWxB3S48U9wf8F56
-	tYLYyaAmzedUJxv1SaFgAvvg9Eg3NdoBihaRHWXmFBLOn5MszJM2BYWLYi+fB5mstzS
-	lbFqIkwWHoKZSsqiusDOwzKdXZPPCS2XQ9VVtFVc=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=gdwg2y3kokkkj5a55z2ilkup5wp5hhxx; d=amazonses.com; t=1661367053;
-	h=To:Subject:From:Message-Id:Date:Feedback-ID;
-	bh=hWvAhWvs3gS4hqdQez/z83MoUZZX797RdQlu0rzshDk=;
-	b=hYhOP/45lZTmDYkD3xUW0Wwa9Jmnu3hJyuYt54GCrZPsJGKe8oDaqa44H40A3WNr
-	BVYP+Ypjjl5ERs09jFRhYX4hqrLQeq5S0glG4kgMeq8oGi5TeEElB7xnePrnyQj6CJQ
-	L3CT536528L653DkkJ6Yyc4hF0paElGXb/GTJ1hs=
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D80CE1870
+	for <ddprobe@lists.linux.dev>; Wed, 24 Aug 2022 19:00:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 81DE2C433D6
+	for <ddprobe@lists.linux.dev>; Wed, 24 Aug 2022 19:00:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1661367652;
+	bh=Z/iZ9icCfZOWUjMavb8uDMrkvnvZefPoG7VCNj66ww4=;
+	h=To:Subject:From:Date:From;
+	b=gzwZgsPJbxnDG5tWkfrZvim+AdcoUpqid/dopXvgnJyhfIWDHfdEewvZaIDrq/mXu
+	 eHYSrCd8oZDVMC8AKfHU27ZJWI10Pu0oj4fxsxKQAqoUK2XkTOXvxdBXT5FNGJzBI0
+	 HblgU4znO9kelsL9y0/cJhLQRfrT2TifFhyu1TH+rJp9Oq/i80v3O5Zkv94R+Rc1/d
+	 WZ3VTx45EvixwJ/DLV+SQLjeuUUJkJFsWfx5G8fUP4J37NCSnw1Dnrk70Xxbc7/xk7
+	 YBX/DBh7DBFj/UZRh6/fb3n19zx2NlNSk7UZotBsfcMB12smj2MkefBPCW0a6jDhQR
+	 wjLGY9Xw2CwPw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 633FEC00140
+	for <ddprobe@lists.linux.dev>; Wed, 24 Aug 2022 19:00:52 +0000 (UTC)
 To: ddprobe@lists.linux.dev
 Subject: RTT-PROBE: lore-subspace-rtt
 From: ddprobe@kernel.org
-Message-ID: <01010182d1316930-d97fe270-49a4-4549-9c3c-71a6b8f6731a-000000@us-west-2.amazonses.com>
-X-Rtt-Probe-Hmac: e79bacd6e499c087d000658f04cebabcba37daf071f73aac527e873c5c6e5c37
-Date: Wed, 24 Aug 2022 18:50:52 +0000
-Feedback-ID: 1.us-west-2.SRWGI0StfyVnjbk6m2dk6vieITagDnHZBvJJLHTOjxo=:AmazonSES
-X-SES-Outgoing: 2022.08.24-54.240.27.186
+Message-Id: <166136765239.15689.1514287610104200495.rtt-probe@aws-us-west-2-korg-lkml-1.web.codeaurora.org>
+X-Rtt-Probe-Hmac: a2f3e5803a969b02cd290ac0caa4373d7830bd316b928f1f733bbc9dd4cfb949
+Date: Wed, 24 Aug 2022 19:00:52 +0000
 Precedence: bulk
 X-Mailing-List: ddprobe@lists.linux.dev
 List-Id: <ddprobe.lists.linux.dev>
 List-Subscribe: <mailto:ddprobe+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:ddprobe+unsubscribe@lists.linux.dev>
 
-rtt-probe:lore-subspace-rtt:1661367052
+rtt-probe:lore-subspace-rtt:1661367652
