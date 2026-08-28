@@ -1,43 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DDD43E51FC
-	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:20:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4505118FC97
+	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:30:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787905234; cv=none; b=dtZkiwZ951AN7Yvkr+GCjH874DsR5syf/tEhR/Y1Gz6GWWDDveHs93uPJe01953o3tPJVFozUj7LW2f/4UB+9IBVKHzrvYZb3eG4GOas6P1bGYquqSIXdQYjF/tPkLXn8gEuEirYiGQ+5o9gwlF2I6CN/dbFPMM8iwVrpvIpStE=
+	t=1787905834; cv=none; b=j4TcxX+1qjhV/FAT7vlHSi9OAzDOtVu0XCgPrkDSrqM+2znkgKOPE9WSPzeUmbzYMOMv6W6FYAz1gx5b0GCXIhDI2RJ7e/ekJyV0pIQYswCRHlzDPcEa7sYmLRukcx4NU6uhfwKVJOHuWig7TbBpjgiinSjC83a0JSr+zOYpUYM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787905234; c=relaxed/simple;
-	bh=B3tEYpPfW7R93ymAa5/Csf2Mn9MCD+BzI0Q8UNYrLVE=;
-	h=To:Subject:From:Message-Id:Date; b=TsCE+6SJL+dKHA+giR+3oC7kZEeGXJfLgAJoBGL9Mj9LEa+nUtP+TihAh+EOctoEqqB8G61Ffc7jrf60noHp/ojsLLC/TwpyhXgjzWzHH3/RBIQsYH1sWQqRXBowuOHPdv9eSpXbEIINrM3A7JFlweP2u8Bh3lQRDPnGd4EkJ7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=T9kqQcxx; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1787905834; c=relaxed/simple;
+	bh=TfwfnsETO0MtIErkY1G4esWZXIAG6k7SX3AAI1+pIBA=;
+	h=To:Subject:From:Message-Id:Date; b=pycsqVcxAn29kdF5kDDaLs1/amn1Dmo+EBtSz8AooJHypdP1+DWvxNxiMKKBsFWooDnpa9Qto/eUErLduN87UNU2O5i+Y5jtLlxQc699FcOElCe0J3UFxrTqgb/edyJ9ELWnz/wZrP4XbF9gUGKrOVOJHhoz6YvHuYKRNnqeBpo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DowWcBMW; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="T9kqQcxx"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D1F0BC2BCF4
-	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:20:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DowWcBMW"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CC6ADC2BCC7
+	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:30:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1787905233;
-	bh=B3tEYpPfW7R93ymAa5/Csf2Mn9MCD+BzI0Q8UNYrLVE=;
+	s=k20201202; t=1787905833;
+	bh=TfwfnsETO0MtIErkY1G4esWZXIAG6k7SX3AAI1+pIBA=;
 	h=To:Subject:From:Date:From;
-	b=T9kqQcxxlOoea8vvDrR3JviqBAzKdhB1aeqBxxNgNlxI3VWi88kN0jEaS4eroy/3Q
-	 nAeV4SZine27+PKdJafFmlzuGd7yqbDCff/z2c2i3KoGoTD1L6sBTA8wiNcu+iGVUy
-	 NN1ria35eDGkmrLcEhPxdwuHBiaojVHWgbRfVoB9/sDr8MccYZWH84ufC7s23WSuKa
-	 xcmQKOLQ6a0G3WQOt2n9XF7+KIdcLMAwbgHCmgtUm9jJjNZ/UR1g0m11ucZ3X7sHf2
-	 eKpLhFyIc8wh60R/7jYBXJAlj+v63lU7AsIcuAQxOj5MshIl8lJ0GZE0NOueTTpt7+
-	 q6DBVpcBkLrKg==
+	b=DowWcBMWjvUVBkuXjQsoLE05HVOAGtXYniyztPh+jLd7eZH/2AOLNbTg3qtL/LFOT
+	 VqLQQF1mg+VjS0pI1qMd3Ra1v/SlHGXYVlU9MBkI9eCa2QY2Oc3Q+GVVR5ThbGrnOL
+	 366qVYfJc7J3Gff84MHcdRodR0Y0DwobwRUjNF3kLt0Sn5aNOW68w5vrs/LWE82WM6
+	 XshIzHaSUExvxf7w+cSNgqQJKONzAL3XpjSTkHgOUbua8aAIhlROVSQp/xVSYE8mR/
+	 p6xLvaX7d4Em0QAGihXP+SLQM1Qt2fK5nV0DlNY+o1g79RWuQGb8ZDeoij5objBTjj
+	 3ceEjcog8CgXQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFB96C61DC6
-	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:20:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA6E1C61DC6
+	for <ddprobe@lists.linux.dev>; Fri, 28 Aug 2026 08:30:33 +0000 (UTC)
 To: ddprobe@lists.linux.dev
 Subject: RTT-PROBE: lore-subspace-rtt
 From: ddprobe@kernel.org
-Message-Id: <178790523370.22389.3392716137434937168.rtt-probe@aws-us-west-2-korg-lkml-1.web.codeaurora.org>
-X-Rtt-Probe-Hmac: 8eaba25426070e62eb91b8f72965eac6347e1cfc1f0a9da4bfbac156e3f4b5df
-Date: Fri, 28 Aug 2026 08:20:33 +0000
+Message-Id: <178790583368.30558.17036458453653671880.rtt-probe@aws-us-west-2-korg-lkml-1.web.codeaurora.org>
+X-Rtt-Probe-Hmac: 846eff59749b8ea74c97b8ac7f4f27d545d43b7b24ad7de3e2b13425c24f2471
+Date: Fri, 28 Aug 2026 08:30:33 +0000
 Precedence: bulk
 X-Mailing-List: ddprobe@lists.linux.dev
 List-Id: <ddprobe.lists.linux.dev>
 List-Subscribe: <mailto:ddprobe+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:ddprobe+unsubscribe@lists.linux.dev>
 
-rtt-probe:lore-subspace-rtt:1787905233
+rtt-probe:lore-subspace-rtt:1787905833
